@@ -1,9 +1,8 @@
-package com.biblioteca;
+package com.biblioteca.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-
 
 public class MenuController {
 
@@ -12,41 +11,36 @@ public class MenuController {
 
     @FXML
     void GerenAutor(ActionEvent event) {
-
+        // Implementação
     }
 
     @FXML
     void GerenLeirores(ActionEvent event) {
-
+        // Implementação
     }
 
     @FXML
     void GerenLivro(ActionEvent event) {
-
+        // Implementação
     }
 
     @FXML
     void VizuEstatisticas(ActionEvent event) {
-
+        // Implementação
     }
 
     @FXML
     void historicoEmprestimo(ActionEvent event) {
-
+        // Implementação
     }
 
     @FXML
     void realizarDevolucao(ActionEvent event) {
-
+        // Implementação
     }
 
     @FXML
     void realizarEmprestimo(ActionEvent event) {
-
-    }
-
-    @FXML
-    void printName(String username) {
-        printName.setText("Bem vindo(a) " + username + "!");
+        // Implementação
     }
 }

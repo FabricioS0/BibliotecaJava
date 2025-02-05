@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BuscarLivroController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.biblioteca.Controller.BuscarLivroController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1976d2" height="60.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="1024.0" />
       <Button mnemonicParsing="false" onAction="#RetornaHome" prefHeight="54.0" prefWidth="107.0" style="-fx-background-color: #1976D2;">

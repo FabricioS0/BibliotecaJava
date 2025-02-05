@@ -1,4 +1,4 @@
-package com.biblioteca;
+package com.biblioteca.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
