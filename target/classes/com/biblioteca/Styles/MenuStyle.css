@@ -1,0 +1,61 @@
+/* Estilo para o AppBar */
+.app-bar {
+    -fx-background-color: #0078D4; /* Cor de fundo */
+    -fx-max-height: 54; /* Altura fixa */
+    -fx-min-width: 1280; /* Ocupa toda a largura */
+    -fx-pref-height: 54; /* Altura fixa */
+    -fx-pref-width: 100%; /* Ocupa toda a largura */
+    -fx-alignment: center-left; /* Alinhamento do texto */
+    -fx-padding: 0 20px; /* Espaçamento interno */
+}
+
+/* Estilo para o título do aplicativo */
+.AppTitle {
+    -fx-text-fill: white; /* Cor do texto */
+    -fx-font-size: 1.5em; /* Tamanho da fonte */
+    -fx-font-weight: bold; /* Negrito */
+}
+
+/* Estilo para a mensagem de boas-vindas */
+.AppWelcome {
+    -fx-text-fill: white; /* Cor do texto */
+    -fx-font-size: 1.2em; /* Tamanho da fonte */
+    -fx-font-weight: normal; /* Peso normal */
+}
+
+/* Estilo para o container dos botões */
+.button-container {
+    -fx-padding: 20px; /* Espaçamento interno */
+    -fx-hgap: 10px; /* Espaçamento horizontal entre botões */
+    -fx-vgap: 10px; /* Espaçamento vertical entre botões */
+    -fx-alignment: center; /* Centraliza os botões */
+
+    /* Centraliza o container na tela */
+    -fx-min-width: 1280; /* Largura mínima */
+    -fx-min-height: 666; /* Altura mínima */
+    -fx-max-width: 1920; /* Largura máxima */
+    -fx-max-height: 1026; /* Altura máxima */
+    -fx-pref-width: 100%; /* Largura preferencial */
+    -fx-pref-height: 100%; /* Altura preferencial */
+}
+
+/* Estilo para os botões */
+.menu-button {
+    -fx-min-width: 100px; /* Largura fixa */
+    -fx-min-height: 100px; /* Altura fixa (quadrado) */
+    -fx-background-color: #f4f4f4; /* Cor de fundo */
+    -fx-border-color: #0078D4; /* Cor da borda */
+    -fx-border-radius: 10px; /* Bordas arredondadas */
+    -fx-background-radius: 10px; /* Bordas arredondadas */
+    -fx-font-size: 1.2em; /* Tamanho da fonte */
+    -fx-text-fill: #0078D4; /* Cor do texto */
+    -fx-font-weight: bold; /* Negrito */
+    -fx-alignment: center; /* Centraliza o texto */
+    -fx-wrap-text: true; /* Quebra de texto */
+}
+
+/* Efeito ao passar o mouse sobre os botões */
+.menu-button:hover {
+    -fx-background-color: #0078D4; /* Cor de fundo ao passar o mouse */
+    -fx-text-fill: white; /* Cor do texto ao passar o mouse */
+}

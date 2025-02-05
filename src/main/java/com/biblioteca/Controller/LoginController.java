@@ -1,4 +1,4 @@
-package com.biblioteca;
+package com.biblioteca.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,22 +27,22 @@ public class LoginController {
             return;
         }
 
-        if(username.equals("admin") && password.equals("12345")){
-            try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
+        if (username.equals("admin") && password.equals("12345")) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/biblioteca/MenuBiblioteca.fxml"));
                 Parent root = loader.load();
 
-                MenuController menuController = loader.getController();
-                menuController.printName(username);
+                // MenuController menuController = loader.getController();
+                // menuController.printName(username); // Chame o novo método
 
                 Stage stage = (Stage) usernameField.getScene().getWindow();
                 stage.setScene(new Scene(root));
                 stage.show();
 
-            }catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else{
+        } else {
             System.out.println("Usuario e senha invalido!");
         }
     }
