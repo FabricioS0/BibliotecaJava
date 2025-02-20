@@ -16,9 +16,10 @@ public class App extends Application {
     private static Scene scene;
 
     @Override
-    public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("MenuBiblioteca"), 640, 480);
+    public void start(@SuppressWarnings("exports") Stage stage) throws IOException {
+        scene = new Scene(loadFXML("Login"), 1280, 720); // Alterado para a tela de login
         stage.setScene(scene);
+        stage.setTitle("Login - Biblioteca");
         stage.show();
     }
 
@@ -35,4 +36,4 @@ public class App extends Application {
         launch();
     }
 
-} 
+}
