@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<Pane maxHeight="1080.0" maxWidth="1920.0" minHeight="720.0" minWidth="1280.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GerenciarLivrosController">
+<Pane maxHeight="1080.0" maxWidth="1920.0" minHeight="720.0" minWidth="1280.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.biblioteca.ViewsControllers.GerenciarLivrosController">
    <children>
       <Pane prefHeight="50.0" prefWidth="1280.0" style="-fx-background-color: #1976D2;">
          <children>
