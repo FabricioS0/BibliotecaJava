@@ -32,8 +32,8 @@ public class LoginController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/biblioteca/MenuBiblioteca.fxml"));
                 Parent root = loader.load();
 
-                // MenuController menuController = loader.getController();
-                // menuController.printName(username); // Chame o novo método
+                MenuController menuController = loader.getController();
+                menuController.printName(username); // Chame o novo método
 
                 Stage stage = (Stage) usernameField.getScene().getWindow();
                 stage.setScene(new Scene(root));

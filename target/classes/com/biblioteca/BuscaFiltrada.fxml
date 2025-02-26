@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.biblioteca.ViewsControllersBuscaFiltradaController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.biblioteca.ViewsControllers.BuscaFiltradaController">
    <children>
       <Pane layoutX="-7.0" layoutY="53.0" prefHeight="547.0" prefWidth="230.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #9a9a9a;">
          <children>
