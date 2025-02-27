@@ -56,6 +56,15 @@ public class LoanController {
         return null;
     }
 
+    public List<LoanDTO> getLoansByPersonName(String name) throws SQLException {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("O nome da pessoa não pode ser vazio.");
+        }
+
+        List<Loan> loans = loanDAO.getLoansByPersonName(name);
+        return convertToDTOList(loans);
+    }
+
     public void updateLoan(LoanDTO loanDTO) throws SQLException {
         Loan loan = new Loan();
         loan.setId(loanDTO.getId());
@@ -70,4 +79,11 @@ public class LoanController {
     public void deleteLoan(int id) throws SQLException {
         loanDAO.deleteLoan(id);
     }
+
+    private LoanDTO convertToDTO(Loan loan) {
+        if (loan == null) {
+            return null;
+        }
+
+    
 }

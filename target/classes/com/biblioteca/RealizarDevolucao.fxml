@@ -2,81 +2,53 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.biblioteca.ViewsControllers.RealizarDevolucaoController">
+<Pane prefHeight="720.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.biblioteca.ViewsControllers.RealizarDevolucaoController">
    <children>
-      <Text layoutX="80.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Realizar Devolução" wrappingWidth="310.13671875">
+      <Text layoutX="80.0" layoutY="60.0" text="Realizar Devolução">
          <font>
             <Font size="32.0" />
          </font>
       </Text>
-      <ImageView fitHeight="53.0" fitWidth="61.0" layoutX="21.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@icons8-data-de-pagamento-30.png" />
-         </image>
-      </ImageView>
-      <Line endX="479.0" layoutX="101.0" layoutY="81.0" startX="-100.0" />
-      <TextField layoutX="21.0" layoutY="98.0" prefHeight="53.0" prefWidth="535.0" text="Pessoa" />
-      <Button layoutX="506.0" layoutY="111.0" mnemonicParsing="false" style="-fx-background-color: invisible;">
+      <TextField fx:id="txtSearchPerson" layoutX="21.0" layoutY="98.0" prefHeight="40.0" prefWidth="440.0" promptText="Digite o nome da pessoa" />
+      <Button layoutX="470.0" layoutY="98.0" mnemonicParsing="false" onAction="#searchPersonLoans" prefHeight="40.0" prefWidth="51.0" style="-fx-background-color: #1976D2;" textFill="WHITE">
          <graphic>
-            <ImageView fitHeight="20.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="20.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@icons8-pesquisar-50.png" />
                </image>
             </ImageView>
-         </graphic>
-      </Button>
-      <Line endX="478.0" layoutX="102.0" layoutY="168.0" startX="-100.0" />
-      <CheckBox layoutX="22.0" layoutY="193.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="535.0" text="Nome Livro">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </CheckBox>
-      <Text layoutX="48.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Empréstimo data &gt; Devolução até: Data" wrappingWidth="396.13671875" />
-      <CheckBox layoutX="21.0" layoutY="247.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="535.0" text="Nome Livro">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </CheckBox>
-      <Text layoutX="48.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Empréstimo data &gt; Devolução até: Data" wrappingWidth="396.13671875" />
-      <Line endX="478.0" layoutX="102.0" layoutY="297.0" startX="-100.0" />
-      <Text layoutX="22.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A devolução está atrasada em X dias" wrappingWidth="353.13671875">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <Text layoutX="22.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valor Inicial da multa: + Valor" wrappingWidth="353.13671875">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <Text layoutX="22.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valor diário da multa: + Valor * quantidade de dias" wrappingWidth="384.13671875">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <Text layoutX="22.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valor total da multa: R$ somatoria completa" wrappingWidth="384.13671875">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <CheckBox alignment="TOP_LEFT" layoutX="22.0" layoutY="468.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="275.0" text="Confirma pagamento de multa">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </CheckBox>
-      <Button layoutX="334.0" layoutY="640.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="221.0" style="-fx-background-color: #1976D2;" text="REALIZAR DEVOLUÇÃO">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Button>
+         </graphic></Button>
+
+      <ListView fx:id="listLoans" layoutX="21.0" layoutY="160.0" prefHeight="200.0" prefWidth="535.0" />
+
+      <Text layoutX="22.0" layoutY="380.0" text="A devolução está atrasada em:" />
+      <Label fx:id="lblLateDays" layoutX="241.0" layoutY="367.0" text="0 dias" />
+
+      <Text layoutX="22.0" layoutY="410.0" text="Valor Inicial da multa:" />
+      <Label fx:id="lblInitialFine" layoutX="241.0" layoutY="397.0" text="R$ 0.00" />
+
+      <Text layoutX="22.0" layoutY="440.0" text="Valor diário da multa:" />
+      <Label fx:id="lblDailyFine" layoutX="241.0" layoutY="427.0" text="R$ 0.00" />
+
+      <Text layoutX="22.0" layoutY="470.0" text="Valor total da multa:" />
+      <Label fx:id="lblTotalFine" layoutX="241.0" layoutY="457.0" text="R$ 0.00" />
+
+      <CheckBox fx:id="chkConfirmPayment" layoutX="22.0" layoutY="510.0" text="Confirma pagamento de multa" />
+
+      <Button layoutX="334.0" layoutY="600.0" mnemonicParsing="false" onAction="#processReturn" prefHeight="50.0" prefWidth="221.0" style="-fx-background-color: #1976D2;" text="REALIZAR DEVOLUÇÃO" textFill="WHITE" />
+      <ImageView fitHeight="50.0" fitWidth="51.0" layoutX="21.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@icons8-data-de-pagamento-30.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

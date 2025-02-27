@@ -88,4 +88,26 @@ public class LoanDAO {
             stmt.executeUpdate();
         }
     }
+
+    public List<Loan> getLoansByPersonName(String name) throws SQLException {
+        List<Loan> loans = new ArrayList<>();
+        String sql = "SELECT l.* FROM Loan l JOIN Person p ON l.id_person = p.id_person WHERE p.name LIKE ?";
+        
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, "%" + name + "%");
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                Loan loan = new Loan();
+                loan.setId(rs.getInt("id_loan"));
+                loan.setLoanDate(rs.getDate("loanDate"));
+                loan.setExpectedReturnDate(rs.getDate("expectedReturnDate"));
+                loan.setReturnDate(rs.getDate("returnDate"));
+                loan.setPersonId(rs.getInt("id_person"));
+                loan.setCopyId(rs.getInt("id_copy"));
+                loans.add(loan);
+            }
+        }
+        return loans;
+    }
 }
