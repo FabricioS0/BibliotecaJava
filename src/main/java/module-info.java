@@ -3,6 +3,7 @@ module com.biblioteca {
     requires javafx.fxml;
     requires java.sql;
     requires lombok;
+    requires javafx.graphics;
 
     // Permite que o JavaFX acesse as classes dentro do pacote
     opens com.biblioteca.ViewsControllers to javafx.fxml;
