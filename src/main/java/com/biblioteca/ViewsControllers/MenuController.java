@@ -24,7 +24,7 @@ public class MenuController {
 
     @FXML
     void GerenLivro(ActionEvent event) {
-        abrirTela("/com/biblioteca/gerenciar_livros.fxml");
+        abrirTela("/com/biblioteca/GerenciadorLivros.fxml");
     }
 
     @FXML
@@ -39,12 +39,12 @@ public class MenuController {
 
     @FXML
     void realizarDevolucao(ActionEvent event) {
-        abrirTela("/com/biblioteca/realizar_devolucao.fxml");
+        abrirTela("/com/biblioteca/RealizarDevolucao.fxml");
     }
 
     @FXML
     void realizarEmprestimo(ActionEvent event) {
-        abrirTela("/com/biblioteca/realizar_emprestimo.fxml");
+        abrirTela("/com/biblioteca/RealizarEmprestimo.fxml");
     }
 
     private void abrirTela(String fxmlPath) {
