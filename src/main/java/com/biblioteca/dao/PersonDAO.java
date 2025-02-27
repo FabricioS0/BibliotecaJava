@@ -1,6 +1,7 @@
 package com.biblioteca.dao;
 
 import com.biblioteca.database.DatabaseConnection;
+import com.biblioteca.dto.PersonDTO;
 import com.biblioteca.model.Person;
 
 import java.sql.*;
@@ -18,12 +19,12 @@ public class PersonDAO {
         }
     }
 
-    public void addPerson(Person person) throws SQLException {
+    public void addPerson(PersonDTO personDTO) throws SQLException {
         String sql = "INSERT INTO Person (name, cpf, birthday) VALUES (?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, person.getName());
-            stmt.setString(2, person.getCpf());
-            stmt.setDate(3, new java.sql.Date(person.getBirthday().getTime()));
+            stmt.setString(1, personDTO.getName());
+            stmt.setString(2, personDTO.getCpf());
+            stmt.setDate(3, new java.sql.Date(personDTO.getBirthday().getTime()));
             stmt.executeUpdate();
         }
     }

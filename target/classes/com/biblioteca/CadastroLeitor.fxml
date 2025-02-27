@@ -22,24 +22,24 @@
             <Font size="32.0" />
          </font>
       </Text>
-      <TextField fx:id="nomeLeitor" layoutX="333.0" layoutY="236.0" prefHeight="32.0" prefWidth="636.0" />
+      <TextField fx:id="campoNome" layoutX="333.0" layoutY="236.0" prefHeight="32.0" prefWidth="636.0" />
       <Text layoutX="333.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome" wrappingWidth="78.619140625">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <TextField fx:id="matriculaLeitor" layoutX="333.0" layoutY="328.0" prefHeight="32.0" prefWidth="636.0" />
+      <TextField fx:id="campoCPF" layoutX="333.0" layoutY="328.0" prefHeight="32.0" prefWidth="636.0" />
       <Text layoutX="333.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CPF" wrappingWidth="78.619140625">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <Button layoutX="809.0" layoutY="610.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #1976D2;" text="SALVAR" textFill="WHITE">
+      <Button fx:id="btnSalvarLeitor" layoutX="809.0" layoutY="610.0" mnemonicParsing="false" onAction="#salvarLeitor" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #1976D2;" text="SALVAR" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <TextField fx:id="matriculaLeitor1" layoutX="333.0" layoutY="419.0" prefHeight="32.0" prefWidth="636.0" />
+      <TextField fx:id="campoAniversario" layoutX="333.0" layoutY="419.0" prefHeight="32.0" prefWidth="636.0" />
       <Text layoutX="333.0" layoutY="412.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ano Aniversário" wrappingWidth="131.619140625">
          <font>
             <Font size="16.0" />
