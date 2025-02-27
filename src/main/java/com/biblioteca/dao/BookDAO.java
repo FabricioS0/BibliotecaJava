@@ -10,7 +10,7 @@ import java.util.List;
 public class BookDAO {
     private Connection connection;
 
-    public BookDAO() {
+    public BookDAO(@SuppressWarnings("exports") Connection conexao) {
         try {
             this.connection = DatabaseConnection.getConnection();
         } catch (SQLException e) {

@@ -7,12 +7,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <Pane maxHeight="1080.0" maxWidth="1920.0" minHeight="720.0" minWidth="1280.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CadastroLivroController">
    <children>
       <Pane prefHeight="54.0" prefWidth="1280.0" style="-fx-background-color: #1976D2;">
          <children>
-            <Text layoutX="14.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gerenciador de Biblioteca" wrappingWidth="325.13671875">
+            <Text fill="WHITE" layoutX="14.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gerenciador de Biblioteca" wrappingWidth="325.13671875">
                <font>
                   <Font size="22.0" />
                </font>
@@ -29,7 +28,7 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <TextField fx:id="nomeLivro" layoutX="284.0" layoutY="203.0" prefHeight="25.0" prefWidth="217.0" />
+      <TextField fx:id="campoTitulo" layoutX="284.0" layoutY="203.0" prefHeight="25.0" prefWidth="217.0" />
       <Text layoutX="284.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descrição" wrappingWidth="119.13671875">
          <font>
             <Font size="16.0" />
@@ -41,26 +40,26 @@
          </font>
       </Text>
       <TextField fx:id="autor" layoutX="531.0" layoutY="203.0" prefHeight="25.0" prefWidth="217.0" />
-      <TextArea fx:id="descricao" layoutX="284.0" layoutY="294.0" prefHeight="99.0" prefWidth="465.0" />
-      <Text layoutX="786.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categoria" wrappingWidth="119.13671875">
+      <TextArea fx:id="campoDescricao" layoutX="284.0" layoutY="294.0" prefHeight="99.0" prefWidth="465.0" />
+      <Text layoutX="786.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edicao" wrappingWidth="119.13671875">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <TextField fx:id="categoria" layoutX="779.0" layoutY="203.0" prefHeight="25.0" prefWidth="217.0" />
+      <TextField fx:id="campoEdicao" layoutX="779.0" layoutY="203.0" prefHeight="25.0" prefWidth="217.0" />
       <Text layoutX="786.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ano Publicação" wrappingWidth="119.13671875">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <TextField fx:id="anoPublicacao" layoutX="779.0" layoutY="294.0" prefHeight="25.0" prefWidth="217.0" />
-      <Text layoutX="786.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Editora" wrappingWidth="119.13671875">
+      <TextField fx:id="campoDataPublicacao" layoutX="779.0" layoutY="294.0" prefHeight="25.0" prefWidth="217.0" />
+      <Text layoutX="786.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN" wrappingWidth="119.13671875">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <TextField fx:id="editora" layoutX="779.0" layoutY="369.0" prefHeight="25.0" prefWidth="217.0" />
-      <Button fx:id="salvarLivro" layoutX="769.0" layoutY="526.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="238.0" style="-fx-background-color: #1976D2;" text="SALVAR">
+      <TextField fx:id="campoISBN" layoutX="779.0" layoutY="369.0" prefHeight="25.0" prefWidth="217.0" />
+      <Button fx:id="salvarLivro" layoutX="769.0" layoutY="526.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="238.0" style="-fx-background-color: #1976D2;" text="SALVAR" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>

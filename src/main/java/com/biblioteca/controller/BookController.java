@@ -1,4 +1,4 @@
-package com.biblioteca.controller;
+package com.biblioteca.Controller;
 
 import com.biblioteca.dao.BookDAO;
 import com.biblioteca.dto.BookDTO;
@@ -12,7 +12,7 @@ public class BookController {
     private BookDAO bookDAO;
 
     public BookController() {
-        this.bookDAO = new BookDAO();
+        this.bookDAO = new BookDAO(null);
     }
 
     public void addBook(BookDTO bookDTO) throws SQLException {

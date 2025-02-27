@@ -7,7 +7,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <Pane maxHeight="1080.0" maxWidth="1920.0" minHeight="720.0" minWidth="1280.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.biblioteca.ViewsControllers.GerenciarLivrosController">
    <children>
       <Pane prefHeight="50.0" prefWidth="1280.0" style="-fx-background-color: #1976D2;">
@@ -26,16 +25,16 @@
       </Text>
       <TableView layoutY="133.0" prefHeight="588.0" prefWidth="1280.0">
         <columns>
-          <TableColumn prefWidth="177.0" text="Titulo" />
-          <TableColumn prefWidth="121.0" text="Autor" />
-            <TableColumn prefWidth="151.0" text="Descrição" />
-            <TableColumn prefWidth="191.0" text="Categoria" />
-            <TableColumn prefWidth="211.0" text="Publicação" />
-            <TableColumn prefWidth="174.0" text="Editora" />
+          <TableColumn fx:id="colTitulo" prefWidth="177.0" text="Titulo" />
+          <TableColumn fx:id="colAutor" prefWidth="121.0" text="Autor" />
+            <TableColumn fx:id="colDescricao" prefWidth="151.0" text="Descrição" />
+            <TableColumn fx:id="colCategoria" prefWidth="191.0" text="Categoria" />
+            <TableColumn fx:id="colPublicacao" prefWidth="211.0" text="Publicação" />
+            <TableColumn fx:id="colISBN" prefWidth="174.0" text="ISBN" />
             <TableColumn prefWidth="254.0" text="Ações" />
         </columns>
       </TableView>
-      <Button layoutX="1016.0" layoutY="70.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="250.0" style="-fx-background-color: #1976D2;" text="Adicionar Livros ">
+      <Button fx:id="btnAdicionarLivro" layoutX="1016.0" layoutY="70.0" mnemonicParsing="false" onAction="#abrirTelaCadastroLivro" prefHeight="47.0" prefWidth="250.0" style="-fx-background-color: #1976D2;" text="Adicionar Livros ">
          <font>
             <Font size="22.0" />
          </font>

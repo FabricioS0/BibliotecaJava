@@ -1,4 +1,4 @@
-package com.biblioteca.controller;
+package com.biblioteca.Controller;
 
 import com.biblioteca.dao.CategoryDAO;
 import com.biblioteca.dto.CategoryDTO;

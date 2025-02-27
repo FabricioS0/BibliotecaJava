@@ -1,5 +1,7 @@
 package com.biblioteca.dto;
 
+
+
 public class BookDTO {
     private int id;
     private String title;
@@ -8,6 +10,15 @@ public class BookDTO {
     private String publicationDate; // Usar String para facilitar a manipulação na UI
     private String isbn;
 
+    public BookDTO(int id, String title, String description, String edition, String dataPublicacao, String isbn) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.edition = edition;
+        this.publicationDate = dataPublicacao;
+        this.isbn = isbn;
+    }
+    
     // Getters and Setters
     public int getId() {
         return id;

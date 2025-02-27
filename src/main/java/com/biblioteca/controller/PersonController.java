@@ -1,4 +1,4 @@
-package com.biblioteca.controller;
+package com.biblioteca.Controller;
 
 import com.biblioteca.dao.PersonDAO;
 import com.biblioteca.dto.PersonDTO;
