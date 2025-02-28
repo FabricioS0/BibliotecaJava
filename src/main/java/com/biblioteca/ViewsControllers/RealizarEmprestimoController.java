@@ -10,6 +10,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -55,7 +56,14 @@ public class RealizarEmprestimoController {
         loan.setCopyId(loanDTO.getCopyId());
 
         // Salvando o empréstimo no banco de dados
-        LoanDAO.addLoan(Loan loan);
+        try {
+            loanDAO.addLoan(loan);
+            showAlert("Sucesso", "Empréstimo realizado com sucesso!", AlertType.INFORMATION);
+        } catch (SQLException e) {
+            showAlert("Erro", "Falha ao registrar o empréstimo: " + e.getMessage(), AlertType.ERROR);
+            e.printStackTrace();
+        }
+
         showAlert("Sucesso", "Empréstimo realizado com sucesso!", AlertType.INFORMATION);
     }
 

@@ -1,16 +1,17 @@
 package com.biblioteca.dto;
 
-
+import java.time.LocalDate;
+import java.util.Date;
 
 public class BookDTO {
     private int id;
     private String title;
     private String description;
     private String edition;
-    private String publicationDate; // Usar String para facilitar a manipulação na UI
+    private Date publicationDate; // Usar String para facilitar a manipulação na UI
     private String isbn;
 
-    public BookDTO(int id, String title, String description, String edition, String dataPublicacao, String isbn) {
+    public BookDTO(int id, String title, String description, String edition, Date dataPublicacao, String isbn) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -52,11 +53,11 @@ public class BookDTO {
         this.edition = edition;
     }
 
-    public String getPublicationDate() {
+    public Date getPublicationDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(String publicationDate) {
+    public void setPublicationDate(Date publicationDate) {
         this.publicationDate = publicationDate;
     }
 

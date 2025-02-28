@@ -2,8 +2,10 @@ package com.biblioteca.ViewsControllers;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 import com.biblioteca.dao.BookDAO;
 import com.biblioteca.database.DatabaseConnection;
@@ -32,23 +34,26 @@ public class CadastroLivroController {
     private void salvarLivro() {
         String titulo = campoTitulo.getText();
         String descricao = campoDescricao.getText();
-        String dataPublicacao = dataPublicacao.getText();
+        java.util.Date dataPublicacao = LocalDate.parse(campoDataPublicacao.getText());
         String edicao = campoEdicao.getText();
         String isbn = campoISBN.getText();
 
         BookDTO book = new BookDTO(0, titulo, descricao, edicao, dataPublicacao, isbn);
 
-        Connection conexao = DatabaseConnection.getConnection();
-        if (conexao != null) {
-            BookDAO bookDAO = new BookDAO(conexao);
-            boolean sucesso = bookDAO.addBook(Book book);
+        try {
+            BookDAO bookDAO = new BookDAO(); // Agora sem parâmetro
+            boolean sucesso = bookDAO.addBook(book);
             if (sucesso) {
                 exibirAlerta("Sucesso", "Livro cadastrado com sucesso!");
                 limparCampos();
             } else {
                 exibirAlerta("Erro", "Falha ao cadastrar o livro.");
             }
+        } catch (SQLException e) {
+            exibirAlerta("Erro", "Ocorreu um erro ao cadastrar o livro: " + e.getMessage());
+            e.printStackTrace();
         }
+
     }
 
     private void limparCampos() {

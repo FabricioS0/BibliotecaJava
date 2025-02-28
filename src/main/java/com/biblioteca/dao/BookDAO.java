@@ -1,6 +1,7 @@
 package com.biblioteca.dao;
 
 import com.biblioteca.database.DatabaseConnection;
+import com.biblioteca.dto.BookDTO;
 import com.biblioteca.model.Book;
 
 import java.sql.*;
@@ -10,15 +11,11 @@ import java.util.List;
 public class BookDAO {
     private Connection connection;
 
-    public BookDAO(@SuppressWarnings("exports") Connection conexao) {
-        try {
-            this.connection = DatabaseConnection.getConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public BookDAO() throws SQLException {
+        this.connection = DatabaseConnection.getConnection();
     }
 
-    public void addBook(Book book) throws SQLException {
+    public boolean addBook(BookDTO book) {
         String sql = "INSERT INTO Book (title, description, edition, publication_date, isbn) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, book.getTitle());
@@ -27,10 +24,14 @@ public class BookDAO {
             stmt.setDate(4, new java.sql.Date(book.getPublicationDate().getTime()));
             stmt.setString(5, book.getIsbn());
             stmt.executeUpdate();
+            return true; // Retorna true se o livro foi cadastrado com sucesso
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // Retorna false em caso de erro
         }
     }
 
-    public List<Book> getAllBooks() throws SQLException {
+    public List<Book> getAllBooks() {
         List<Book> books = new ArrayList<>();
         String sql = "SELECT * FROM Book";
         try (Statement stmt = connection.createStatement();
@@ -45,11 +46,13 @@ public class BookDAO {
                 book.setIsbn(rs.getString("isbn"));
                 books.add(book);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return books;
     }
 
-    public Book getBookById(int id) throws SQLException {
+    public Book getBookById(int id) {
         String sql = "SELECT * FROM Book WHERE id_book = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, id);
@@ -64,11 +67,13 @@ public class BookDAO {
                 book.setIsbn(rs.getString("isbn"));
                 return book;
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return null;
     }
 
-    public void updateBook(Book book) throws SQLException {
+    public boolean updateBook(Book book) {
         String sql = "UPDATE Book SET title = ?, description = ?, edition = ?, publication_date = ?, isbn = ? WHERE id_book = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, book.getTitle());
@@ -78,14 +83,22 @@ public class BookDAO {
             stmt.setString(5, book.getIsbn());
             stmt.setInt(6, book.getId());
             stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 
-    public void deleteBook(int id) throws SQLException {
+    public boolean deleteBook(int id) {
         String sql = "DELETE FROM Book WHERE id_book = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

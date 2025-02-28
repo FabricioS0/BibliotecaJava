@@ -61,8 +61,5 @@ public class MenuController {
         }
     }
 
-    public void printName(String username) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'printName'");
-    }
+    
 }

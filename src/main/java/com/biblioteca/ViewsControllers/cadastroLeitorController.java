@@ -48,11 +48,12 @@ public class cadastroLeitorController {
         // Salvar no banco de dados
         try {
             PersonDAO personDAO = new PersonDAO();
-            PersonDAO.addPerson(personDTO);  // Chama o método para salvar no banco
+            personDAO.addPerson(personDTO);  // Chama o método da instância correta
             showAlert("Sucesso", "Leitor cadastrado com sucesso!", AlertType.INFORMATION);
             limparCampos(); // Limpa os campos após o cadastro
         } catch (SQLException e) {
             showAlert("Erro", "Erro ao salvar no banco de dados: " + e.getMessage(), AlertType.ERROR);
+            e.printStackTrace();
         }
     }
 
