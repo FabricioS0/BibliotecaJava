@@ -2,103 +2,121 @@ package com.biblioteca.dao;
 
 import com.biblioteca.database.DatabaseConnection;
 import com.biblioteca.model.User;
+import com.biblioteca.Enums.Permission;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {
-    private Connection connection;
 
-    public UserDAO() {
+    public void save(User user) {
         try {
-            this.connection = DatabaseConnection.getConnection();
-        } catch (SQLException e) {
+            Connection connection = DatabaseConnection.getConnection();
+
+            String sql = "INSERT INTO user (username, name, password, permission) VALUES (?, ?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, user.getUsername());
+            statement.setString(2, user.getName());
+            statement.setString(3, user.getPassword());
+            statement.setString(4, user.getPermission().name()); // Converte o enum para String
+
+            statement.execute();
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public boolean login(String username, String password) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM User WHERE username = ? AND password = ?");
-            statement.setString(1, username);
-            statement.setString(2, password);
-            ResultSet resultSet = statement.executeQuery();
-            return resultSet.next();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public void addUser (User user) throws SQLException {
-        String sql = "INSERT INTO User (username, name, password, permission, id_person) VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, user.getUsername());
-            stmt.setString(2, user.getName());
-            stmt.setString(3, user.getPassword());
-            stmt.setString(4, user.getPermission());
-            stmt.setInt(5, user.getPersonId());
-            stmt.executeUpdate();
-        }
-    }
-
-    public List<User> getAllUsers() throws SQLException {
+    public List<User> findAll() {
         List<User> users = new ArrayList<>();
-        String sql = "SELECT * FROM User";
-        try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-            while (rs.next()) {
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+
+            String sql = "SELECT * FROM user";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
                 User user = new User();
-                user.setId(rs.getInt("id_user"));
-                user.setUsername(rs.getString("username"));
-                user.setName(rs.getString("name"));
-                user.setPassword(rs.getString("password"));
-                user.setPermission(rs.getString("permission"));
-                user.setPersonId(rs.getInt("id_person"));
+                user.setId(resultSet.getInt("id_user"));
+                user.setUsername(resultSet.getString("username"));
+                user.setName(resultSet.getString("name"));
+                user.setPassword(resultSet.getString("password"));
+                user.setPermission(Permission.valueOf(resultSet.getString("permission")));
+
                 users.add(user);
             }
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return users;
     }
 
-    public User getUserById(int id) throws SQLException {
-        String sql = "SELECT * FROM User WHERE id_user = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                User user = new User();
-                user.setId(rs.getInt("id_user"));
-                user.setUsername(rs.getString("username"));
-                user.setName(rs.getString("name"));
-                user.setPassword(rs.getString("password"));
-                user.setPermission(rs.getString("permission"));
-                user.setPersonId(rs.getInt("id_person"));
-                return user;
+    public void update(User user) {
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+
+            String sql = "UPDATE user SET username = ?, name = ?, password = ?, permission = ? WHERE id_user = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, user.getUsername());
+            statement.setString(2, user.getName());
+            statement.setString(3, user.getPassword());
+            statement.setString(4, user.getPermission().name()); // Converte o enum para String
+            statement.setInt(5, user.getId());
+
+            statement.execute();
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(User user) {
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+
+            String sql = "DELETE FROM user WHERE id_user = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, user.getId());
+
+            statement.execute();
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public User findById(int id) {
+        User user = new User();
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+
+            String sql = "SELECT * FROM user WHERE id_user = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                user.setId(resultSet.getInt("id_user"));
+                user.setUsername(resultSet.getString("username"));
+                user.setName(resultSet.getString("name"));
+                user.setPassword(resultSet.getString("password"));
+                user.setPermission(Permission.valueOf(resultSet.getString("permission"))); // Converte String para Enum
             }
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return null;
-    }
-
-    public void updateUser (User user) throws SQLException {
-        String sql = "UPDATE User SET username = ?, name = ?, password = ?, permission = ?, id_person = ? WHERE id_user = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, user.getUsername());
-            stmt.setString(2, user.getName());
-            stmt.setString(3, user.getPassword());
-            stmt.setString(4, user.getPermission());
-            stmt.setInt(5, user.getPersonId());
-            stmt.setInt(6, user.getId());
-            stmt.executeUpdate();
-        }
-    }
-
-    public void deleteUser (int id) throws SQLException {
-        String sql = "DELETE FROM User WHERE id_user = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
-        }
+        return user;
     }
 }

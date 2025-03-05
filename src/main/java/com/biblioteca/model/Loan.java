@@ -1,7 +1,9 @@
 package com.biblioteca.model;
-import lombok.*;
 
 import java.util.Date;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -10,20 +12,13 @@ public class Loan {
     private Date loanDate;
     private Date expectedReturnDate;
     private Date returnDate;
-    private int personId;
-    private int copyId;
-    private String bookTitle;
-    
-    public Loan() {
-    }
 
-    public Loan(int id, Date loanDate, Date expectedReturnDate, Date returnDate, int personId, int copyId, String bookTitle) {
-        this.id = id;
+    public Loan(Date loanDate, Date expectedReturnDate, Date returnDate) {
         this.loanDate = loanDate;
         this.expectedReturnDate = expectedReturnDate;
         this.returnDate = returnDate;
-        this.personId = personId;
-        this.copyId = copyId;
-        this.bookTitle = bookTitle;
+    }
+
+    public Loan() {
     }
 }

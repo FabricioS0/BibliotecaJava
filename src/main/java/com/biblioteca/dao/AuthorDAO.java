@@ -1,75 +1,120 @@
 package com.biblioteca.dao;
 
-import com.biblioteca.database.DatabaseConnection;
 import com.biblioteca.model.Author;
+import com.biblioteca.database.DatabaseConnection;
 
-import java.sql.*;
-import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class AuthorDAO {
-    private Connection connection;
 
-    public AuthorDAO() {
+    // save author to the database
+    public void save(Author author) throws SQLException {
         try {
-            this.connection = DatabaseConnection.getConnection();
+            Connection connection = DatabaseConnection.getConnection();
+
+            String sql = "INSERT INTO authors (name) VALUES (?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, author.getName());
+
+            statement.execute();
+            connection.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void addAuthor(Author author) throws SQLException {
-        String sql = "INSERT INTO Author (name) VALUES (?)";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, author.getName());
-            stmt.executeUpdate();
+    // update author in the database
+    public void update(Author author) throws SQLException {
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+
+            String sql = "UPDATE authors SET name = ? WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, author.getName());
+            statement.setInt(2, author.getId());
+
+            statement.execute();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    public List<Author> getAllAuthors() throws SQLException {
+    // get All authors from the database
+    public List<Author> findAll() throws SQLException {
         List<Author> authors = new ArrayList<>();
-        String sql = "SELECT * FROM Author";
-        try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-            while (rs.next()) {
-                Author author = new Author();
-                author.setId(rs.getInt("id_author"));
-                author.setName(rs.getString("name"));
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+
+            String sql = "SELECT * FROM authors";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Author author = new Author(sql);
+                author.setId(resultSet.getInt("id"));
+                author.setName(resultSet.getString("name"));
                 authors.add(author);
             }
+
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return authors;
     }
 
-    public Author getAuthorById(int id) throws SQLException {
-        String sql = "SELECT * FROM Author WHERE id_author = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                Author author = new Author();
-                author.setId(rs.getInt("id_author"));
-                author.setName(rs.getString("name"));
-                return author;
+    // get author by name
+    public Author findByName(String name) throws SQLException {
+        Author author = new Author();
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+
+            String sql = "SELECT * FROM authors WHERE name = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, name);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                author.setId(resultSet.getInt("id"));
+                author.setName(resultSet.getString("name"));
             }
+
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return null;
+        return author;
     }
 
-    public void updateAuthor(Author author) throws SQLException {
-        String sql = "UPDATE Author SET name = ? WHERE id_author = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, author.getName());
-            stmt.setInt(2, author.getId());
-            stmt.executeUpdate();
-        }
-    }
+    // get author by id
+    public Author findById(int id) throws SQLException {
+        Author author = new Author();
+        try {
+            Connection connection = DatabaseConnection.getConnection();
 
-    public void deleteAuthor(int id) throws SQLException {
-        String sql = "DELETE FROM Author WHERE id_author = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
+            String sql = "SELECT * FROM authors WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                author.setId(resultSet.getInt("id"));
+                author.setName(resultSet.getString("name"));
+            }
+
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+        return author;
     }
 }

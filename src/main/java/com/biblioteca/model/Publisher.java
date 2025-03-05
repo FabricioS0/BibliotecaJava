@@ -1,6 +1,7 @@
-// Publisher.java
 package com.biblioteca.model;
-import lombok.*;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -8,10 +9,10 @@ public class Publisher {
     private int id;
     private String name;
 
-    public Publisher() {}
-
-    public Publisher(int id, String name) {
-        this.id = id;
+    public Publisher(String name) {
         this.name = name;
+    }
+
+    public Publisher() {
     }
 }
