@@ -19,7 +19,7 @@ public class CopyDAO {
 
             String sql = "INSERT INTO copy (status, identifier) VALUES (?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, copy.getStatus().name()); // Converte o enum para String
+            statement.setString(1, copy.getStatus()); // Converte o enum para String
             statement.setString(2, copy.getIdentifier());
 
             statement.execute();
@@ -42,7 +42,7 @@ public class CopyDAO {
             while (resultSet.next()) {
                 Copy copy = new Copy();
                 copy.setId(resultSet.getInt("id_copy"));
-                copy.setStatus(Status.valueOf(resultSet.getString("status"))); // Converte String para Enum
+                copy.setStatus(resultSet.getString("status")); // Converte String para Enum
                 copy.setIdentifier(resultSet.getString("identifier"));
 
                 copies.add(copy);
@@ -55,13 +55,36 @@ public class CopyDAO {
         return copies;
     }
 
+    public Copy findByTitleBook(String title) {
+        Copy copy = new Copy();
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+
+            String sql = "select id_copy, status, identifier from copy where id_book = (select id_book from book where title = ?) and status = 'available';";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, title);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                copy.setId(resultSet.getInt("id_copy"));
+                copy.setStatus(resultSet.getString("status")); // Converte String para Enum
+                copy.setIdentifier(resultSet.getString("identifier"));
+            }
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return copy;
+    }
+
     public void update(Copy copy) {
         try {
             Connection connection = DatabaseConnection.getConnection();
 
             String sql = "UPDATE copy SET status = ?, identifier = ? WHERE id_copy = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, copy.getStatus().name()); // Converte o enum para String
+            statement.setString(1, copy.getStatus()); // Converte o enum para String
             statement.setString(2, copy.getIdentifier());
             statement.setInt(3, copy.getId());
 
@@ -101,7 +124,7 @@ public class CopyDAO {
 
             if (resultSet.next()) {
                 copy.setId(resultSet.getInt("id_copy"));
-                copy.setStatus(Status.valueOf(resultSet.getString("status"))); // Converte String para Enum
+                copy.setStatus(resultSet.getString("status")); // Converte String para Enum
                 copy.setIdentifier(resultSet.getString("identifier"));
             }
             statement.close();

@@ -21,6 +21,10 @@ public class CopyService {
         return copyDAO.findAll();
     }
 
+    public Copy getByTitleBook(String title) throws SQLException {
+        return copyDAO.findByTitleBook(title);
+    }
+
     public void updateCopy(Copy copy) throws SQLException {
         copyDAO.update(copy);
     }

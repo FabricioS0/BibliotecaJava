@@ -22,7 +22,7 @@ public class PersonController {
         return personService.getAllPersons();
     }
 
-    public Person getByName(String name) throws SQLException {
+    public List<Person> getByName(String name) throws SQLException {
         return personService.getByName(name);
     }
 

@@ -22,7 +22,7 @@ public class BookDAO {
             statement.setString(2, book.getDescription());
             statement.setString(3, book.getEdition());
             statement.setDate(4, new java.sql.Date(book.getPublicationDate().getTime()));
-            statement.setInt(5, book.getIsbn());
+            statement.setString(5, book.getIsbn());
 
             statement.execute();
             statement.close();
@@ -43,12 +43,12 @@ public class BookDAO {
 
             while (resultSet.next()) {
                 Book book = new Book();
-                book.setId(resultSet.getInt("id"));
+                book.setId(resultSet.getInt("id_book"));
                 book.setTitle(resultSet.getString("title"));
                 book.setDescription(resultSet.getString("description"));
                 book.setEdition(resultSet.getString("edition"));
                 book.setPublicationDate(resultSet.getDate("publication_date"));
-                book.setIsbn(resultSet.getInt("isbn"));
+                book.setIsbn(resultSet.getString("isbn"));
 
                 books.add(book);
             }
@@ -61,33 +61,35 @@ public class BookDAO {
         return books;
     }
 
-    public Book findByName(String name){
-        Book book = new Book();
+    public List<Book> findByName(String name){
+        List<Book> books = new ArrayList<>();
         try{
             Connection connection = DatabaseConnection.getConnection();
 
-            String sql = "SELECT * FROM book WHERE title = ?";
+            String sql = "SELECT * FROM book WHERE title LIKE ?";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, name);
+            statement.setString(1, "%" + name + "%");
+
             ResultSet resultSet = statement.executeQuery();
 
-            
-            while (resultSet.next()) {
-                book.setId(resultSet.getInt("id"));
+            while(resultSet.next()){
+                Book book = new Book();
+                book.setId(resultSet.getInt("id_book"));
                 book.setTitle(resultSet.getString("title"));
                 book.setDescription(resultSet.getString("description"));
                 book.setEdition(resultSet.getString("edition"));
                 book.setPublicationDate(resultSet.getDate("publication_date"));
-                book.setIsbn(resultSet.getInt("isbn"));
+                book.setIsbn(resultSet.getString("isbn"));
+
+                books.add(book);
             }
             statement.close();
             connection.close();
-            
         }
-        catch (SQLException e) {
+        catch (SQLException e){
             e.printStackTrace();
         }
-        return book;
+        return books;
     }
 
     public void update(Book book) {
@@ -100,7 +102,7 @@ public class BookDAO {
             statement.setString(2, book.getDescription());
             statement.setString(3, book.getEdition());
             statement.setDate(4, new java.sql.Date(book.getPublicationDate().getTime()));
-            statement.setInt(5, book.getIsbn());
+            statement.setString(5, book.getIsbn());
             statement.setInt(6, book.getId());
 
             statement.execute();
@@ -143,7 +145,7 @@ public class BookDAO {
                 book.setDescription(resultSet.getString("description"));
                 book.setEdition(resultSet.getString("edition"));
                 book.setPublicationDate(resultSet.getDate("publication_date"));
-                book.setIsbn(resultSet.getInt("isbn"));
+                book.setIsbn(resultSet.getString("isbn"));
             }
             statement.close();
             connection.close();
@@ -170,7 +172,7 @@ public class BookDAO {
                 book.setDescription(resultSet.getString("description"));
                 book.setEdition(resultSet.getString("edition"));
                 book.setPublicationDate(resultSet.getDate("publication_date"));
-                book.setIsbn(resultSet.getInt("isbn"));
+                book.setIsbn(resultSet.getString("isbn"));
             }
             statement.close();
             connection.close();

@@ -21,7 +21,7 @@ public class BookService {
         return bookDAO.findAll();
     }
 
-    public Book getByName(String name) throws SQLException {
+    public List<Book> getByName(String name) throws SQLException {
         return bookDAO.findByName(name);
     }
 

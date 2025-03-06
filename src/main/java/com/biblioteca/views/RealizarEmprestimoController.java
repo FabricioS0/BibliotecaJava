@@ -1,11 +1,15 @@
 package com.biblioteca.views;
 
 import com.biblioteca.controller.BookController;
+import com.biblioteca.controller.CopyController;
 import com.biblioteca.controller.PersonController;
 import com.biblioteca.controller.LoanController;
 import com.biblioteca.model.Book;
+import com.biblioteca.model.Copy;
 import com.biblioteca.model.Loan;
 import com.biblioteca.model.Person;
+
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -19,8 +23,13 @@ import javafx.util.Callback;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue; 
 import java.util.Date;
 import java.util.List;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 import javafx.scene.Scene;
 
@@ -34,7 +43,7 @@ public class RealizarEmprestimoController {
     @FXML
     private DatePicker dataDevolucaoPicker;
     @FXML
-    private Button RealizarEmprestimo;
+    private Button Emprestimo;
     @FXML
     private Button Voltar;
     @FXML
@@ -48,6 +57,7 @@ public class RealizarEmprestimoController {
 
     private PersonController personController = new PersonController();
     private BookController bookController = new BookController();
+    private CopyController copyController = new CopyController();
     private LoanController loanController = new LoanController();
 
     @FXML
@@ -90,6 +100,29 @@ public class RealizarEmprestimoController {
 
         // Configurar ação do botão Voltar
         Voltar.setOnAction(event -> handleVoltar());
+        Emprestimo.setOnAction(event -> handleEmprestimo());
+
+        // Definir a data de empréstimo como a data atual
+        LocalDate today = LocalDate.now();
+        dataEmprestimoPicker.setValue(today);
+
+        // Definir a data de devolução como 7 dias após a data de empréstimo
+        LocalDate returnDate = today.plusDays(7);
+        dataDevolucaoPicker.setValue(returnDate);
+
+        // Adicionar um listener para mudar a data de devolução quando a data de
+        // empréstimo mudar
+        dataEmprestimoPicker.valueProperty().addListener(new ChangeListener<LocalDate>() {
+            @Override
+            public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue,
+                    LocalDate newValue) {
+                if (newValue != null) {
+                    // Calcular nova data de devolução
+                    LocalDate newReturnDate = newValue.plusDays(7);
+                    dataDevolucaoPicker.setValue(newReturnDate);
+                }
+            }
+        });
     }
 
     @FXML
@@ -107,21 +140,18 @@ public class RealizarEmprestimoController {
                 List<Person> allPersons = personController.getAllPersons();
                 ListaPessoas.getItems().addAll(allPersons);
             } else {
-                Person person = personController.getByName(pessoa);
-                if (person != null) {
-                    ListaPessoas.getItems().add(person);
-                }
+                List<Person> persons = personController.getByName(pessoa);
+                ListaPessoas.getItems().addAll(persons);
             }
 
             // Pesquisar livros
             if (livro.isEmpty()) {
                 List<Book> allBooks = bookController.getAllBooks();
                 ListaLivros.getItems().addAll(allBooks);
+
             } else {
-                Book book = bookController.getByName(livro);
-                if (book != null) {
-                    ListaLivros.getItems().add(book);
-                }
+                List<Book> books = bookController.getByName(livro);
+                ListaLivros.getItems().addAll(books);
             }
 
         } catch (SQLException e) {
@@ -141,16 +171,26 @@ public class RealizarEmprestimoController {
 
             if (selectedPerson != null && selectedBook != null) {
                 Loan loan = new Loan(loanDate, expectedReturnDate, null); // returnDate será null inicialmente
-                // Aqui você deve obter o ID da cópia do livro (se necessário)
-                int copyId = 1; // Exemplo, você deve implementar a lógica para obter o ID correto
-                loanController.createLoan(loan, copyId, selectedPerson.getId());
-                // Exibir mensagem de sucesso
+                Copy copy = copyController.getByTitleBook(selectedBook.getTitle());
+
+
+                loanController.createLoan(loan, copy.getId(), selectedPerson.getId());
+                showSuccessAlert("Empréstimo realizado com sucesso!");
             } else {
-                // Exibir mensagem de erro se não houver pessoa ou livro selecionado
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Erro");
+                alert.setHeaderText("Erro ao realizar empréstimo");
+                alert.setContentText("Selecione uma pessoa e um livro para realizar o empréstimo.");
+                alert.showAndWait();
             }
         } catch (SQLException e) {
             e.printStackTrace();
             // Tratar exceção (exibir mensagem de erro, etc.)
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Erro ao realizar no modulo de emprestimo");
+            alert.setContentText("tente novamente");
+            alert.showAndWait();
         }
     }
 
@@ -158,7 +198,8 @@ public class RealizarEmprestimoController {
     public void handleVoltar() {
         try {
             Stage stage = (Stage) Voltar.getScene().getWindow();
-            AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("/com/biblioteca/MenuBiblioteca.fxml"));
+            AnchorPane root = (AnchorPane) FXMLLoader
+                    .load(getClass().getResource("/com/biblioteca/MenuBiblioteca.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);
         } catch (IOException e) {
@@ -166,4 +207,11 @@ public class RealizarEmprestimoController {
         }
     }
 
+    private void showSuccessAlert(String message) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Emprestimo - Sucesso");
+        alert.setHeaderText("Olá,");
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }

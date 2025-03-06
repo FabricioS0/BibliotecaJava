@@ -11,7 +11,7 @@ public class CopyController {
     private CopyService copyService = new CopyService();
 
     public void createCopy(String status, String identifier) throws SQLException {
-        Copy copy = new Copy(Status.valueOf(status), identifier);
+        Copy copy = new Copy(status, identifier);
         copyService.addCopy(copy);
     }
 
@@ -23,8 +23,12 @@ public class CopyController {
         return copyService.getAllCopies();
     }
 
+    public Copy getByTitleBook(String title) throws SQLException {
+        return copyService.getByTitleBook(title);
+    }
+
     public void updateCopy(int id, String status, String identifier) throws SQLException {
-        Copy copy = new Copy(Status.valueOf(status), identifier);
+        Copy copy = new Copy(status, identifier);
         copy.setId(id);
         copyService.updateCopy(copy);
     }

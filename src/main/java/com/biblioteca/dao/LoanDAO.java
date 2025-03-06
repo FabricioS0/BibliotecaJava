@@ -18,7 +18,7 @@ public class LoanDAO {
         try {
             Connection connection = DatabaseConnection.getConnection();
 
-            String sql = "INSERT INTO loan (copy_id, person_id, loan_date, expected_return_date, return_date) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO loan (id_copy, id_person, loanDate, expectedReturnDate, returnDate) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setInt(1, copyId);
@@ -47,9 +47,9 @@ public class LoanDAO {
 
             if (resultSet.next()) {
                 loan.setId(resultSet.getInt("id_loan"));
-                loan.setLoanDate(resultSet.getDate("loan_date"));
-                loan.setExpectedReturnDate(resultSet.getDate("expected_return_date"));
-                loan.setReturnDate(resultSet.getDate("return_date"));
+                loan.setLoanDate(resultSet.getDate("loanDate"));
+                loan.setExpectedReturnDate(resultSet.getDate("expectedReturnDate"));
+                loan.setReturnDate(resultSet.getDate("returnDate"));
                 // Aqui você pode adicionar o status se necessário
                 // loan.setStatus(Status.valueOf(resultSet.getString("status"))); // Se houver um status
             }
@@ -73,9 +73,9 @@ public class LoanDAO {
             while (resultSet.next()) {
                 Loan loan = new Loan();
                 loan.setId(resultSet.getInt("id_loan"));
-                loan.setLoanDate(resultSet.getDate("loan_date"));
-                loan.setExpectedReturnDate(resultSet.getDate("expected_return_date"));
-                loan.setReturnDate(resultSet.getDate("return_date"));
+                loan.setLoanDate(resultSet.getDate("loanDate"));
+                loan.setExpectedReturnDate(resultSet.getDate("expectedReturnDate"));
+                loan.setReturnDate(resultSet.getDate("returnDate"));
                 // Aqui você pode adicionar o status se necessário
                 // loan.setStatus(Status.valueOf(resultSet.getString("status"))); // Se houver um status
 
@@ -93,7 +93,7 @@ public class LoanDAO {
         try {
             Connection connection = DatabaseConnection.getConnection();
 
-            String sql = "UPDATE loan SET loan_date = ?, expected_return_date = ?, return_date = ? WHERE id_loan = ?";
+            String sql = "UPDATE loan SET loanDate = ?, expectedReturnDate = ?, returnDate = ? WHERE id_loan = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setDate(1, new Date(loan.getLoanDate().getTime()));
             statement.setDate(2, new Date(loan.getExpectedReturnDate().getTime()));

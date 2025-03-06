@@ -9,8 +9,13 @@ import java.util.List;
 public class BookController {
     private BookService bookService = new BookService();
 
-    public void createBook(String title, String description, String edition, java.util.Date publicationDate, int isbn) throws SQLException {
-        Book book = new Book(title, description, edition, publicationDate, isbn);
+    public void createBook(String title, String description, String edition, java.util.Date publicationDate, String isbn) throws SQLException {
+        Book book = new Book();
+        book.setTitle(title);
+        book.setDescription(description);
+        book.setEdition(edition);
+        book.setPublicationDate(publicationDate);
+        book.setIsbn(isbn);
         bookService.addBook(book);
     }
 
@@ -22,13 +27,18 @@ public class BookController {
         return bookService.getAllBooks();
     }
 
-    public Book getByName(String name) throws SQLException {
+    public List<Book> getByName(String name) throws SQLException {
         return bookService.getByName(name);
     }
 
-    public void updateBook(int id, String title, String description, String edition, java.util.Date publicationDate, int isbn) throws SQLException {
-        Book book = new Book(title, description, edition, publicationDate, isbn);
+    public void updateBook(int id, String title, String description, String edition, java.util.Date publicationDate, String isbn) throws SQLException {
+        Book book = new Book();
         book.setId(id);
+        book.setTitle(title);
+        book.setDescription(description);
+        book.setEdition(edition);
+        book.setPublicationDate(publicationDate);
+        book.setIsbn(isbn);
         bookService.updateBook(book);
     }
 

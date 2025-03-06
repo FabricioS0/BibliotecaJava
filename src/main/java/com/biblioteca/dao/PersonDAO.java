@@ -115,8 +115,8 @@ public class PersonDAO {
         return person;
     }
 
-    public Person findByName(String name){
-        Person person = new Person();
+    public List<Person> findByName(String name){
+        List<Person> persons = new ArrayList<>();
         try {
             Connection connection = DatabaseConnection.getConnection();
 
@@ -128,16 +128,19 @@ public class PersonDAO {
             ResultSet resultSet = statement.executeQuery();
 
             while(resultSet.next()){
-                
+                Person person = new Person();
                 person.setId(resultSet.getInt("id_person"));
                 person.setName(resultSet.getString("name"));
                 person.setCpf(resultSet.getString("cpf"));
                 person.setBirthday(resultSet.getDate("birthday"));
+
+                persons.add(person);
             }
-            
+            statement.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return person;
+        return persons;
     }
 }

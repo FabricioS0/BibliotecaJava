@@ -21,7 +21,7 @@ public class PersonService {
         return personDAO.findAll();
     }
 
-    public Person getByName(String name) throws SQLException {
+    public List<Person> getByName(String name) throws SQLException {
         return personDAO.findByName(name);
     }
 
