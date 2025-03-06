@@ -18,7 +18,7 @@
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="1280.0" styleClass="app-bar">
          <children>
             <Label styleClass="AppTitle" text="Realizar emprestimo" />
-            <Button id="Voltar" mnemonicParsing="false" styleClass="voltar" text="Voltar" />
+            <Button id="Voltar" fx:id="Voltar" mnemonicParsing="false" styleClass="voltar" text="Voltar" onAction="#handleVoltar" />
          </children>
       </HBox>
       <FlowPane alignment="CENTER_LEFT" layoutY="54.0" minHeight="584.0" prefHeight="666.0" prefWidth="1280.0" styleClass="spacebetween">
@@ -111,7 +111,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <ListView id="ListaPessoas" prefHeight="670.0" prefWidth="629.0" />
+                        <ListView id="ListaPessoas" fx:id="ListaPessoas" prefHeight="670.0" prefWidth="629.0" />
                      </children>
                   </VBox>
                   <VBox>
@@ -121,7 +121,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <ListView id="ListaLivros" prefHeight="670.0" prefWidth="629.0" />
+                        <ListView fx:id="ListaLivros" id="ListaLivros" prefHeight="670.0" prefWidth="629.0" />
                      </children>
                   </VBox>
                </children>

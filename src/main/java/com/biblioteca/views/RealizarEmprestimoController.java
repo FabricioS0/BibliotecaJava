@@ -7,19 +7,24 @@ import com.biblioteca.model.Book;
 import com.biblioteca.model.Loan;
 import com.biblioteca.model.Person;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
-public class RealizarEmprestimoController {
+import javafx.scene.Scene;
 
+public class RealizarEmprestimoController {
     @FXML
     private TextField pessoaField;
     @FXML
@@ -82,6 +87,9 @@ public class RealizarEmprestimoController {
                 };
             }
         });
+
+        // Configurar ação do botão Voltar
+        Voltar.setOnAction(event -> handleVoltar());
     }
 
     @FXML
@@ -145,4 +153,17 @@ public class RealizarEmprestimoController {
             // Tratar exceção (exibir mensagem de erro, etc.)
         }
     }
+
+    @FXML
+    public void handleVoltar() {
+        try {
+            Stage stage = (Stage) Voltar.getScene().getWindow();
+            AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("/com/biblioteca/MenuBiblioteca.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -48,7 +48,9 @@ public class Menu {
 
     @FXML
     public void handleEmprestimos() {
+        // definir previousScene para poder voltar
         loadScene("/com/biblioteca/RealizarEmprestimo.fxml");
+        
     }
 
     @FXML
