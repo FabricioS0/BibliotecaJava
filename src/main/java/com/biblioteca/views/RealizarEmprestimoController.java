@@ -26,12 +26,4 @@ public class RealizarEmprestimoController {
         String livro = livroField.getText();
         // Lógica para realizar o empréstimo
     }
-
-    @FXML
-    public void handleKeyPress(KeyEvent event) {
-        if (event.getCode() == KeyCode.ESC) {
-            // Lógica para voltar à tela anterior
-            // Exemplo: voltarParaTelaAnterior();
-        }
-    }
 }

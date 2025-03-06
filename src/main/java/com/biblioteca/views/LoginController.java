@@ -2,7 +2,6 @@ package com.biblioteca.views;
 
 import com.biblioteca.model.User;
 import com.biblioteca.service.UserService;
-import com.biblioteca.views.*;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,8 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 
@@ -50,13 +47,13 @@ public class LoginController {
 
     private void loadMenuBiblioteca(User user) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/path/to/MenuBiblioteca.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/biblioteca/MenuBiblioteca.fxml"));
             Parent root = loader.load();
-
+    
             // Passar o usuário para o MenuController
-            MenuController menuController = loader.getController();
-            menuController.setUser (user); // Método que você deve implementar no MenuController
-
+            Menu menu = loader.getController(); // Ensure you have the correct controller class
+            menu.setUser (user); // Método que você deve implementar no MenuController
+    
             Stage stage = (Stage) usernameField.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
@@ -64,12 +61,5 @@ public class LoginController {
             e.printStackTrace();
         }
     }
-
-    @FXML
-    public void handleKeyPress(KeyEvent event) {
-        if (event.getCode() == KeyCode.ESC) {
-            // Lógica para voltar à tela anterior
-            // Exemplo: voltarParaTelaAnterior();
-        }
-    }
+                                              
 }

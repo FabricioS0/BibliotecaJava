@@ -19,11 +19,5 @@ public class BuscaFiltradaController {
         // Lógica para buscar com base nos filtros
     }
 
-    @FXML
-    public void handleKeyPress(KeyEvent event) {
-        if (event.getCode() == KeyCode.ESC) {
-            // Lógica para voltar à tela anterior
-            // Exemplo: voltarParaTelaAnterior();
-        }
-    }
+    
 }

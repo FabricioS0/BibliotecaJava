@@ -18,11 +18,4 @@ public class GerenciadorLeitoresController {
         // Lógica para adicionar leitores
     }
 
-    @FXML
-    public void handleKeyPress(KeyEvent event) {
-        if (event.getCode() == KeyCode.ESC) {
-            // Lógica para voltar à tela anterior
-            // Exemplo: voltarParaTelaAnterior();
-        }
-    }
 }

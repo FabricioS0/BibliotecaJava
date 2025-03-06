@@ -35,11 +35,5 @@ public class CadastroLivroController {
         // Lógica para salvar o livro
     }
 
-    @FXML
-    public void handleKeyPress(KeyEvent event) {
-        if (event.getCode() == KeyCode.ESC) {
-            // Lógica para voltar à tela anterior
-            // Exemplo: voltarParaTelaAnterior();
-        }
-    }
+
 }
