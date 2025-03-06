@@ -3,77 +3,111 @@ package com.biblioteca.dao;
 import com.biblioteca.database.DatabaseConnection;
 import com.biblioteca.model.Language;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LanguageDAO {
-    private Connection connection;
 
-    public LanguageDAO() {
+    public void save(Language language) {
         try {
-            this.connection = DatabaseConnection.getConnection();
-        } catch (SQLException e) {
+            Connection connection = DatabaseConnection.getConnection();
+
+            String sql = "INSERT INTO language (acronym, name) VALUES (?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, language.getAcronym());
+            statement.setString(2, language.getName());
+
+            statement.execute();
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void addLanguage(Language language) throws SQLException {
-        String sql = "INSERT INTO Language (acronym, name) VALUES (?, ?)";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, language.getAcronym());
-            stmt.setString(2, language.getName());
-            stmt.executeUpdate();
-        }
-    }
-
-    public List<Language> getAllLanguages() throws SQLException {
+    public List<Language> findAll() {
         List<Language> languages = new ArrayList<>();
-        String sql = "SELECT * FROM Language";
-        try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-            while (rs.next()) {
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+
+            String sql = "SELECT * FROM language";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
                 Language language = new Language();
-                language.setId(rs.getInt("id_language"));
-                language.setAcronym(rs.getString("acronym"));
-                language.setName(rs.getString("name"));
+                language.setId(resultSet.getInt("id_language"));
+                language.setAcronym(resultSet.getString("acronym"));
+                language.setName(resultSet.getString("name"));
+
                 languages.add(language);
             }
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return languages;
     }
 
-    public Language getLanguageById(int id) throws SQLException {
-        String sql = "SELECT * FROM Language WHERE id_language = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                Language language = new Language();
-                language.setId(rs.getInt("id_language"));
-                language.setAcronym(rs.getString("acronym"));
-                language.setName(rs.getString("name"));
-                return language;
+    public void update(Language language) {
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+
+            String sql = "UPDATE language SET acronym = ?, name = ? WHERE id_language = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, language.getAcronym());
+            statement.setString(2, language.getName());
+            statement.setInt(3, language.getId());
+
+            statement.execute();
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(Language language) {
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+
+            String sql = "DELETE FROM language WHERE id_language = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, language.getId());
+
+            statement.execute();
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Language findById(int id) {
+        Language language = new Language();
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+
+            String sql = "SELECT * FROM language WHERE id_language = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                language.setId(resultSet.getInt("id_language"));
+                language.setAcronym(resultSet.getString("acronym"));
+                language.setName(resultSet.getString("name"));
             }
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return null;
-    }
-
-    public void updateLanguage(Language language) throws SQLException {
-        String sql = "UPDATE Language SET acronym = ?, name = ? WHERE id_language = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, language.getAcronym());
-            stmt.setString(2, language.getName());
-            stmt.setInt(3, language.getId());
-            stmt.executeUpdate();
-        }
-    }
-
-    public void deleteLanguage(int id) throws SQLException {
-        String sql = "DELETE FROM Language WHERE id_language = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
-        }
+        return language;
     }
 }

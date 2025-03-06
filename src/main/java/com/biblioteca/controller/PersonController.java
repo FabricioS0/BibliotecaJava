@@ -1,65 +1,36 @@
-package com.biblioteca.Controller;
+package com.biblioteca.controller;
 
-import com.biblioteca.dao.PersonDAO;
-import com.biblioteca.dto.PersonDTO;
 import com.biblioteca.model.Person;
+import com.biblioteca.service.PersonService;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PersonController {
-    private PersonDAO personDAO;
+    private PersonService personService = new PersonService();
 
-    public PersonController() {
-        this.personDAO = new PersonDAO();
+    public void createPerson(String name, String cpf, java.util.Date birthday) throws SQLException {
+        Person person = new Person(name, cpf, birthday);
+        personService.addPerson(person);
     }
 
-    public void addPerson(PersonDTO personDTO) throws SQLException {
-        Person person = new Person();
-        person.setName(personDTO.getName());
-        person.setCpf(personDTO.getCpf());
-        person.setBirthday(java.sql.Date.valueOf(personDTO.getBirthday()));
-        personDAO.addPerson(person);
+    public Person getPerson(int id) throws SQLException {
+        return personService.getPerson(id);
     }
 
-    public List<PersonDTO> getAllPersons() throws SQLException {
-        List<Person> persons = personDAO.getAllPersons();
-        List<PersonDTO> personDTOs = new ArrayList<>();
-        for (Person person : persons) {
-            PersonDTO dto = new PersonDTO();
-            dto.setId(person.getId());
-            dto.setName(person.getName());
-            dto.setCpf(person.getCpf());
-            dto.setBirthday(person.getBirthday().toString());
-            personDTOs.add(dto);
-        }
-        return personDTOs;
+    public List<Person> getAllPersons() throws SQLException {
+        return personService.getAllPersons();
     }
 
-    public PersonDTO getPersonById(int id) throws SQLException {
-        Person person = personDAO.getPersonById(id);
-        if (person != null) {
-            PersonDTO dto = new PersonDTO();
-            dto.setId(person.getId());
-            dto.setName(person.getName());
-            dto.setCpf(person.getCpf());
-            dto.setBirthday(person.getBirthday().toString());
-            return dto;
-        }
-        return null;
-    }
-
-    public void updatePerson(PersonDTO personDTO) throws SQLException {
-        Person person = new Person();
-        person.setId(personDTO.getId());
-        person.setName(personDTO.getName());
-        person.setCpf(personDTO.getCpf());
-        person.setBirthday(java.sql.Date.valueOf(personDTO.getBirthday()));
-        personDAO.updatePerson(person);
+    public void updatePerson(int id, String name, String cpf, java.util.Date birthday) throws SQLException {
+        Person person = new Person(name, cpf, birthday);
+        person.setId(id);
+        personService.updatePerson(person);
     }
 
     public void deletePerson(int id) throws SQLException {
-        personDAO.deletePerson(id);
+        Person person = new Person();
+        person.setId(id);
+        personService.deletePerson(person);
     }
 }

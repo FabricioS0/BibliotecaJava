@@ -1,10 +1,11 @@
-// Person.java
 package com.biblioteca.model;
-import lombok.*;
 
 import java.util.Date;
 
-@Getter
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter	
 @Setter
 public class Person {
     private int id;
@@ -12,15 +13,12 @@ public class Person {
     private String cpf;
     private Date birthday;
 
-    public Person() {
-    }
-
-    public Person(int id, String name, String cpf, Date birthday) {
-        this.id = id;
+    public Person(String name, String cpf, Date birthday) {
         this.name = name;
         this.cpf = cpf;
         this.birthday = birthday;
     }
 
-    
+    public Person() {
+    }
 }

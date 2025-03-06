@@ -1,25 +1,26 @@
-// User.java
 package com.biblioteca.model;
-import lombok.*;
+
+import com.biblioteca.Enums.Permission;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
 public class User {
     private int id;
     private String username;
-    private String name;
-    private String password; // Armazenar criptografado
-    private String permission;
-    private int personId;
+    private	String name;
+    private String password;
+    private Permission permission;
 
-    public User() {}
-
-    public User(int id, String username, String name, String password, String permission, int personId) {
-        this.id = id;
+    public User(String username, String name, String password, Permission permission) {
         this.username = username;
         this.name = name;
         this.password = password;
         this.permission = permission;
-        this.personId = personId;
+    }
+
+    public User() {
     }
 }

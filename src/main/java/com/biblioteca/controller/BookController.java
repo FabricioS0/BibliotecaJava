@@ -1,73 +1,36 @@
-package com.biblioteca.Controller;
+package com.biblioteca.controller;
 
-import com.biblioteca.dao.BookDAO;
-import com.biblioteca.dto.BookDTO;
 import com.biblioteca.model.Book;
+import com.biblioteca.service.BookService;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class BookController {
-    private BookDAO bookDAO;
+    private BookService bookService = new BookService();
 
-    public BookController() {
-        this.bookDAO = new BookDAO(null);
+    public void createBook(String title, String description, String edition, java.util.Date publicationDate, int isbn) throws SQLException {
+        Book book = new Book(title, description, edition, publicationDate, isbn);
+        bookService.addBook(book);
     }
 
-    public void addBook(BookDTO bookDTO) throws SQLException {
-        Book book = new Book();
-        book.setTitle(bookDTO.getTitle());
-        book.setDescription(bookDTO.getDescription());
-        book.setEdition(bookDTO.getEdition());
-        book.setPublicationDate(java.sql.Date.valueOf(bookDTO.getPublicationDate()));
-        book.setIsbn(bookDTO.getIsbn());
-        bookDAO.addBook(book);
+    public Book getBook(int id) throws SQLException {
+        return bookService.getBook(id);
     }
 
-    public List<BookDTO> getAllBooks() throws SQLException {
-        List<Book> books = bookDAO.getAllBooks();
-        List<BookDTO> bookDTOs = new ArrayList<>();
-        for (Book book : books) {
-            BookDTO dto = new BookDTO();
-            dto.setId(book.getId());
-            dto.setTitle(book.getTitle());
-            dto.setDescription(book.getDescription());
-            dto.setEdition(book.getEdition());
-            dto.setPublicationDate(book.getPublicationDate().toString());
-            dto.setIsbn(book.getIsbn());
-            bookDTOs.add(dto);
-        }
-        return bookDTOs;
+    public List<Book> getAllBooks() throws SQLException {
+        return bookService.getAllBooks();
     }
 
-    public BookDTO getBookById(int id) throws SQLException {
-        Book book = bookDAO.getBookById(id);
-        if (book != null) {
-            BookDTO dto = new BookDTO();
-            dto.setId(book.getId());
-            dto.setTitle(book.getTitle());
-            dto.setDescription(book.getDescription());
-            dto.setEdition(book.getEdition());
-            dto.setPublicationDate(book.getPublicationDate().toString());
-            dto.setIsbn(book.getIsbn());
-            return dto;
-        }
-        return null;
-    }
-
-    public void updateBook(BookDTO bookDTO) throws SQLException {
-        Book book = new Book();
-        book.setId(bookDTO.getId());
-        book.setTitle(bookDTO.getTitle());
-        book.setDescription(bookDTO.getDescription());
-        book.setEdition(bookDTO.getEdition());
-        book.setPublicationDate(java.sql.Date.valueOf(bookDTO.getPublicationDate()));
-        book.setIsbn(bookDTO.getIsbn());
-        bookDAO.updateBook(book);
+    public void updateBook(int id, String title, String description, String edition, java.util.Date publicationDate, int isbn) throws SQLException {
+        Book book = new Book(title, description, edition, publicationDate, isbn);
+        book.setId(id);
+        bookService.updateBook(book);
     }
 
     public void deleteBook(int id) throws SQLException {
-        bookDAO.deleteBook(id);
+        Book book = new Book();
+        book.setId(id);
+        bookService.deleteBook(book);
     }
 }

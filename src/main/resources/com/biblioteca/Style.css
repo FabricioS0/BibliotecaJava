@@ -1,11 +1,9 @@
 /* Barra Superior */
-#topBar {
-    -fx-background-color: #1976D2;
-    -fx-padding: 10px;
-    -fx-alignment: center-left;
-    -fx-font-size: 18px;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
+.topBar {
+    -fx-background-color: #0078D4; /* Cor de fundo */
+    -fx-alignment: center-left; /* Alinhamento do texto */
+    -fx-padding: 0 20px; /* Espaçamento interno */
+    -fx-text-fill: white; /* Cor do texto */
 }
 
 /* Botão de Logout */
@@ -22,17 +20,18 @@
 }
 
 /* Botões do Menu */
-.menuButton {
-    -fx-background-color: transparent;
-    -fx-text-fill: #333;
-    -fx-font-size: 14px;
+.button {
+    -fx-background-color: #0078D4; /* Cor de fundo */
+    -fx-border-radius: 10px; /* Bordas arredondadas */
+    -fx-background-radius: 10px; /* Bordas arredondadas */
+    -fx-font-size: 1.2em; /* Tamanho da fonte */
+    -fx-text-fill: #fff; /* Cor do texto */
+    -fx-font-weight: bold; /* Negrito */
     -fx-padding: 10px;
-    -fx-alignment: center-left;
+    -fx-alignment: center; /* Centraliza o texto */
+    -fx-wrap-text: true; /* Quebra de texto */
 }
 
-.menuButton:hover {
-    -fx-background-color: #E0E0E0;
-}
 
 /* Área de Conteúdo */
 #contentArea {

@@ -1,21 +1,22 @@
-// Copy.java
 package com.biblioteca.model;
-import lombok.*;
+
+
+import com.biblioteca.Enums.Status;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
 public class Copy {
     private int id;
-    private String status;
+    private Status status;
     private String identifier;
-    private int bookId;
 
-    public Copy() {}
-    
-    public Copy(int id, String status, String identifier, int bookId) {
-        this.id = id;
+    public Copy(Status status, String identifier) {
         this.status = status;
         this.identifier = identifier;
-        this.bookId = bookId;
     }
+
+    public Copy() {}
 }
