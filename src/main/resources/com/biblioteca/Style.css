@@ -1,3 +1,32 @@
+/* Estilo para o AppBar */
+.app-bar {
+    -fx-background-color: #0078D4; /* Cor de fundo */
+    -fx-max-height: 54; /* Altura fixa */
+    -fx-min-width: 1280; /* Ocupa toda a largura */
+    -fx-pref-height: 54; /* Altura fixa */
+    -fx-pref-width: 100%; /* Ocupa toda a largura */
+    -fx-alignment: center-left; /* Alinhamento do texto */
+    -fx-padding: 0 20px; /* Espaçamento interno */
+    /* Espaço entre os elementos */
+    -fx-spacing: 1000px;
+}
+
+.voltar {
+    -fx-background-color: #fff; /* Cor de fundo */
+    -fx-border-radius: 10px; /* Bordas arredondadas */
+    -fx-background-radius: 10px; /* Bordas arredondadas */
+    -fx-font-size: 1.2em; /* Tamanho da fonte */
+    -fx-font-weight: bold; /* Negrito */
+    -fx-alignment: center; /* Centraliza o texto */
+}
+
+/* Estilo para o título do aplicativo */
+.AppTitle {
+    -fx-text-fill: white; /* Cor do texto */
+    -fx-font-size: 1.5em; /* Tamanho da fonte */
+    -fx-font-weight: bold; /* Negrito */
+}
+
 /* Barra Superior */
 .topBar {
     -fx-background-color: #0078D4; /* Cor de fundo */
@@ -27,7 +56,7 @@
     -fx-font-size: 1.2em; /* Tamanho da fonte */
     -fx-text-fill: #fff; /* Cor do texto */
     -fx-font-weight: bold; /* Negrito */
-    -fx-padding: 10px;
+    /* -fx-padding: 10px; */
     -fx-alignment: center; /* Centraliza o texto */
     -fx-wrap-text: true; /* Quebra de texto */
 }
@@ -39,3 +68,11 @@
     -fx-alignment: center;
     -fx-font-size: 16px;
 }
+
+.spacebetween {
+    -fx-spacing: 10px;
+}	
+
+.spacebetween-multa {
+    -fx-spacing: 100spx;
+}	

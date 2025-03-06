@@ -117,4 +117,20 @@ public class AuthorDAO {
 
         return author;
     }
+
+    public void delete(Author author) throws SQLException {
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+
+            String sql = "DELETE FROM authors WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, author.getId());
+
+            statement.execute();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

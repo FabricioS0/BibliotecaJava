@@ -21,6 +21,10 @@ public class BookService {
         return bookDAO.findAll();
     }
 
+    public Book getByName(String name) throws SQLException {
+        return bookDAO.findByName(name);
+    }
+
     public void updateBook(Book book) throws SQLException {
         bookDAO.update(book);
     }

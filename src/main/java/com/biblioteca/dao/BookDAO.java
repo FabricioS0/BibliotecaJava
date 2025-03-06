@@ -61,6 +61,35 @@ public class BookDAO {
         return books;
     }
 
+    public Book findByName(String name){
+        Book book = new Book();
+        try{
+            Connection connection = DatabaseConnection.getConnection();
+
+            String sql = "SELECT * FROM book WHERE title = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, name);
+            ResultSet resultSet = statement.executeQuery();
+
+            
+            while (resultSet.next()) {
+                book.setId(resultSet.getInt("id"));
+                book.setTitle(resultSet.getString("title"));
+                book.setDescription(resultSet.getString("description"));
+                book.setEdition(resultSet.getString("edition"));
+                book.setPublicationDate(resultSet.getDate("publication_date"));
+                book.setIsbn(resultSet.getInt("isbn"));
+            }
+            statement.close();
+            connection.close();
+            
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return book;
+    }
+
     public void update(Book book) {
         try {
             Connection connection = DatabaseConnection.getConnection();

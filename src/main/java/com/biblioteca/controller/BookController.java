@@ -22,6 +22,10 @@ public class BookController {
         return bookService.getAllBooks();
     }
 
+    public Book getByName(String name) throws SQLException {
+        return bookService.getByName(name);
+    }
+
     public void updateBook(int id, String title, String description, String edition, java.util.Date publicationDate, int isbn) throws SQLException {
         Book book = new Book(title, description, edition, publicationDate, isbn);
         book.setId(id);

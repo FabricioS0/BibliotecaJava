@@ -21,6 +21,10 @@ public class PersonService {
         return personDAO.findAll();
     }
 
+    public Person getByName(String name) throws SQLException {
+        return personDAO.findByName(name);
+    }
+
     public void updatePerson(Person person) throws SQLException {
         personDAO.update(person);
     }

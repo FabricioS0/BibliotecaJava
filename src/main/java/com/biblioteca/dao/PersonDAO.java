@@ -114,4 +114,30 @@ public class PersonDAO {
         }
         return person;
     }
+
+    public Person findByName(String name){
+        Person person = new Person();
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+
+            // pesquisa * em person onde nome contenha %name%
+            String sql = "SELECT * FROM person WHERE name LIKE ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, "%" + name + "%");
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while(resultSet.next()){
+                
+                person.setId(resultSet.getInt("id_person"));
+                person.setName(resultSet.getString("name"));
+                person.setCpf(resultSet.getString("cpf"));
+                person.setBirthday(resultSet.getDate("birthday"));
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return person;
+    }
 }

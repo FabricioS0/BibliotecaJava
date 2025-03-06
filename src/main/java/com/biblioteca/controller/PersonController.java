@@ -22,6 +22,10 @@ public class PersonController {
         return personService.getAllPersons();
     }
 
+    public Person getByName(String name) throws SQLException {
+        return personService.getByName(name);
+    }
+
     public void updatePerson(int id, String name, String cpf, java.util.Date birthday) throws SQLException {
         Person person = new Person(name, cpf, birthday);
         person.setId(id);
