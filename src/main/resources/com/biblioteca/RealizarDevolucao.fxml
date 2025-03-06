@@ -23,7 +23,7 @@
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@icons8-pesquisar-50.png" />
+                  <Image url="@Icons/icons8-pesquisar-50.png" />
                </image>
             </ImageView>
          </graphic></Button>
@@ -45,6 +45,7 @@
       <CheckBox fx:id="chkConfirmPayment" layoutX="22.0" layoutY="510.0" text="Confirma pagamento de multa" />
 
       <Button layoutX="334.0" layoutY="600.0" mnemonicParsing="false" onAction="#processReturn" prefHeight="50.0" prefWidth="221.0" style="-fx-background-color: #1976D2;" text="REALIZAR DEVOLUÇÃO" textFill="WHITE" />
+      <Button layoutX="254.0" layoutY="600.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="50.0" prefWidth="73.0" stylesheets="@Style.css" text="Voltar" />
       <ImageView fitHeight="50.0" fitWidth="51.0" layoutX="21.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Icons/icons8-data-de-pagamento-30.png" />

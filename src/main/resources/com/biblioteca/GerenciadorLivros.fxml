@@ -11,7 +11,7 @@
    <children>
       <Pane prefHeight="50.0" prefWidth="1280.0" style="-fx-background-color: #1976D2;">
          <children>
-            <Text layoutX="14.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gerenciador de Biblioteca">
+            <Text fill="WHITE" layoutX="14.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gerenciador de Biblioteca">
                <font>
                   <Font size="22.0" />
                </font>
@@ -34,10 +34,11 @@
             <TableColumn prefWidth="254.0" text="Ações" />
         </columns>
       </TableView>
-      <Button fx:id="btnAdicionarLivro" layoutX="1016.0" layoutY="70.0" mnemonicParsing="false" onAction="#abrirTelaCadastroLivro" prefHeight="47.0" prefWidth="250.0" style="-fx-background-color: #1976D2;" text="Adicionar Livros ">
+      <Button fx:id="btnAdicionarLivro" layoutX="1016.0" layoutY="70.0" mnemonicParsing="false" onAction="#abrirTelaCadastroLivro" prefHeight="47.0" prefWidth="250.0" style="-fx-background-color: #1976D2;" text="Adicionar Livros " textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>
       </Button>
+      <Button layoutX="937.0" layoutY="70.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="47.0" prefWidth="71.0" stylesheets="@Style.css" text="Voltar" />
    </children>
 </Pane>
